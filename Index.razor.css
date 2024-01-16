@@ -1,0 +1,37 @@
+﻿.example-container {
+    max-height: auto;
+}
+
+.card-container {
+    border-width: 100px;
+    border-color: darkviolet;
+    max-width: 400px;
+    max-height: 200px;
+}
+
+.k-flex-40 {
+    flex: 1 1 40;
+}
+
+.k-card-image {
+    height: 100px;
+}
+
+.k-card-cover {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+
+.p-header {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.k-card-body {
+    padding: 0px 8px !important;
+}
+.image-with-text {
+    position: relative;
+}

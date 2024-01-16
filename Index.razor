@@ -1,0 +1,79 @@
+﻿@page "/"
+
+<PageTitle>Resign Table Shop</PageTitle>
+
+<TelerikStackLayout Orientation="StackLayoutOrientation.Horizontal" Spacing="40px">
+    @foreach (Item item in Availableitems)
+    {
+        <div class="card-container">
+            <TelerikCard Class="k-flex-40">
+                <CardImage Src=@item.Image></CardImage>
+                <CardBody Class="k-card-body">
+                    <p class="p-header">@item.Name</p>
+                    <CardActions Class="action-panel" Orientation="CardOrientation.Horizontal">
+                        <TelerikButton OnClick=@item.OnClickBuyButton Enabled=@item.IsAvaiable ThemeColor=@ThemeConstant.Button.ThemeColor.Dark>@item.BuyButtonText</TelerikButton>
+                        <header>
+                            Quantity:
+                            <p>@item.Quantity</p>
+                        </header>
+                        <p style="font-weight: bold">Price: @item.NetPrice.ToString()</p>
+                    </CardActions>
+                </CardBody>
+            </TelerikCard>
+        </div>
+    }
+</TelerikStackLayout>
+@code
+{
+    public List<Item> Availableitems = new List<Item>()
+    {
+      new Item("Oak with Black Resign", 3, 1350m, 42m, "https://cdn.shopify.com/s/files/1/0064/0683/2193/products/resin_table_3_1200x1200.jpg?v=1542803483"),
+      new Item("Maple with Blue Resign - coffee table", 2, 780m, 25m, "https://i.pinimg.com/originals/00/5d/b2/005db2eab763162b7c2d52e265fbab67.jpg"),
+      new Item(@"Round resign table - Sea with Islands", 1, 2520m, 120m, "https://i.etsystatic.com/24236404/r/il/1b6247/2466291565/il_1588xN.2466291565_m5wr.jpg"),
+    };
+    #region Item Class
+    public class Item
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public string Image { get; set; }
+        public decimal NetPrice { get; set; }
+        public decimal ShippingPrice { get; set; }
+        public bool IsAvaiable { get; set; } = true;
+        public string BuyButtonText { get; set; } = "BUY";
+
+        public Item(string name, int quantity, decimal netPrice, decimal shippingPrice, string image)
+        {
+            this.Name = name;
+            this.Quantity = quantity;
+            this.Image = image;
+            this.NetPrice = netPrice;
+            this.ShippingPrice = shippingPrice;
+        }
+
+        public void OnClickBuyButton()
+        {
+            if (this.Quantity > 0)
+            {
+                this.Quantity--;
+                CheckBuyButton();
+            }
+        }
+        public void CheckBuyButton()
+        {
+            if (this.Quantity > 0)
+            {
+                this.BuyButtonText = "BUY";
+            }
+            else
+            {
+                this.BuyButtonText = "SOLD";
+                IsAvaiable = false;
+            }
+        }
+    }
+    #endregion
+
+    #region Panel Bar
+    #endregion
+}
